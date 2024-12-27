@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Profile</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #003C43;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(315deg, #003C43 3%, #135D66 38%, #77B0AA 68%, #E3FEF7 98%); 
+            animation: gradient 15s ease infinite;
+            background-size: 400% 400%;
+            background-attachment: fixed;
+            overflow: auto;
+        }
+
+        @keyframes gradient {
+            0% {
+                background-position: 0% 0%;
+            }
+            50% {
+                background-position: 100% 100%;
+            }
+            100% {
+                background-position: 0% 0%;
+            }
+        }
+
+        .wave {
+            background: rgba(227, 254, 247, 0.25);
+            border-radius: 1000% 1000% 0 0;
+            position: fixed;
+            width: 200%;
+            height: 12em;
+            animation: wave 10s -3s linear infinite;
+            transform: translate3d(0, 0, 0);
+            opacity: 0.8;
+            bottom: 0;
+            left: 0;
+            z-index: -1;
+        }
+
+        .wave:nth-of-type(2) {
+            bottom: -1.25em;
+            animation: wave 18s linear reverse infinite;
+            opacity: 0.8;
+        }
+
+        .wave:nth-of-type(3) {
+            bottom: -2.5em;
+            animation: wave 20s -1s reverse infinite;
+            opacity: 0.9;
+        }
+
+        @keyframes wave {
+            2% {
+                transform: translateX(1);
+            }
+            25% {
+                transform: translateX(-25%);
+            }
+            50% {
+                transform: translateX(-50%);
+            }
+            75% {
+                transform: translateX(-25%);
+            }
+            100% {
+                transform: translateX(1);
+            }
+        }
+
+        .container {
+            width: 60%;
+            max-width: 1000px;
+            margin: auto;
+            background-color: #FFFFFF;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            padding: 30px 40px;
+            margin-top: 10px;
+            animation: fadeInAnimation 1s ease forwards;
+        }
+
+        .header {
+            text-align: center;
+            background: linear-gradient(-45deg, #003C43, #135D66, #003C43);
+            background-size: 400% 400%;
+            color: #E3FEF7;
+            padding: 20px;
+            border-radius: 12px 12px 0 0;
+            width: calc(100% - 20px);
+            animation: gradientAnimation 10s ease-in-out infinite;
+        }
+
+        @keyframes gradientAnimation {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 32px;
+            font-weight: 700;
+            color: #E3FEF7;
+            text-shadow: 2px 2px 5px rgba(0, 60, 67, 0.4);
+            transition: color 0.3s ease-in-out, transform 0.3s ease-in-out, text-shadow 0.3s ease-in-out;
+        }
+
+        .header h1:hover {
+            color: #ffffff;
+            transform: scale(1.1);
+            text-shadow: 3px 3px 7px rgba(0, 60, 67, 0.6);
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-row {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            width: 48%;
+            margin-bottom: 10px;
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+            position: relative;
+            color: #135D66;
+            font-size: 16px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding-bottom: 3px;
+            transition: color 0.3s ease-in-out;
+        }
+
+        label::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0%;
+            height: 2px;
+            background-color: #77B0AA;
+            transition: width 0.4s ease-in-out;
+        }
+
+        label:hover {
+            color: #003C43;
+        }
+
+        label:hover::after {
+            width: 100%;
+        }
+
+
+        input[type="text"],
+        input[type="date"],
+        input[type="email"],
+        input[type="number"] {
+            padding: 12px;
+            width: 100%;
+            margin-top: 5px;
+            border: 1px solid #77B0AA;
+            border-radius: 10px;
+            background-color: #E3FEF7;
+            color: #003C43;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+
+        input[type="text"]:focus,
+        input[type="date"]:focus,
+        input[type="email"]:focus,
+        input[type="number"]:focus {
+            outline: none;
+            border-color: #135D66;
+            background-color: #FFFFFF;
+            box-shadow: 0 0 5px #77B0AA;
+        }
+
+        input[type="text"]:hover,
+        input[type="date"]:hover,
+        input[type="email"]:hover,
+        input[type="number"]:hover {
+            background-color: #f0f8f7;
+        }
+
+        button {
+            background: linear-gradient(45deg, #003C43, #135D66);
+            color: #E3FEF7;
+            padding: 12px 20px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: bold;
+            text-align: center;
+            width: 48%;
+            border: none;
+            transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        button:hover {
+            background: linear-gradient(45deg, #135D66, #77B0AA);
+            box-shadow: 0 8px 15px rgba(0, 60, 67, 0.3);
+            transform: translateY(-5px);
+        }
+
+        button:active {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0, 60, 67, 0.2);
+        }
+
+        button:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(135, 181, 185, 0.5);
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+
+        .button-container button {
+            width: 48%;
+        }
+
+        @keyframes fadeInAnimation {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <div>
+        <div class="wave"></div>
+        <div class="wave"></div>
+        <div class="wave"></div>
+     </div>
+    
+    <div class="container">
+        <div class="header">
+            <h1>Edit Profile</h1>
+        </div>
+        <p>
+        <form id="edit-form" action="/edit-mahasiswa/{{ .mahasiswa.NIM }}" method="POST">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="nim">NIM:</label>
+                    <input type="text" id="nim" name="nim" value="{{ .mahasiswa.NIM }}" readonly required>
+                </div>
+                <div class="form-group">
+                    <label for="no-ijazah">No Ijazah:</label>
+                    <input type="text" id="no_ijazah" name="no-ijazah" value="{{ .mahasiswa.NoIjazah }}" readonly required>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="nama-lengkap">Nama Lengkap:</label>
+                    <input type="text" id="nama_lengkap" name="nama-lengkap" value="{{ .mahasiswa.NamaLengkap }}" required>
+                </div>
+                <div class="form-group">
+                    <label for="tempat-lahir">Tempat Lahir:</label>
+                    <input type="text" id="tempat_lahir" name="tempat-lahir" value="{{ .mahasiswa.TempatLahir }}" required>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="tanggal-lahir">Tanggal Lahir:</label>
+                    <input type="date" id="tanggal_lahir" name="tanggal-lahir" value="{{ .mahasiswa.TanggalLahir }}" required>
+                </div>
+                <div class="form-group">
+                    <label for="agama">Agama:</label>
+                    <input type="text" id="agama" name="agama" value="{{ .mahasiswa.Agama }}" required>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="alamat">Alamat:</label>
+                    <input type="text" id="alamat" name="alamat" value="{{ .mahasiswa.Alamat }}" required>
+                </div>
+                <div class="form-group">
+                    <label for="no-telp">No Telepon:</label>
+                    <input type="text" id="no_telp" name="no-telp" value="{{ .mahasiswa.NoTelp }}" required>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" value="{{ .mahasiswa.Email }}" required>
+                </div>
+                <div class="form-group">
+                    <label for="ipk">IPK:</label>
+                    <input type="number" id="ipk" name="ipk" step="0.01" value="{{ .mahasiswa.IPK }}" readonly required>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="bidang-studi">Bidang Studi:</label>
+                    <input type="text" id="bidang_studi" name="bidang-studi" value="{{ .mahasiswa.BidangStudi }}" readonly required>
+                </div>
+            </div>
+
+            <div class="button-container">
+                <button type="button" onclick="window.location.href='/mahasiswa';">Cancel</button>
+                <button type="submit">Save Changes</button>
+            </div>
+        </form>
+    </div>
+</body>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const urlParams = new URLSearchParams(window.location.search);
+            const nim = urlParams.get('nim');
+
+            fetch(`/get-mahasiswa/${nim}`)
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('nim').value = data.NIM;
+                    document.getElementById('no_ijazah').value = data.NoIjazah;
+                    document.getElementById('nama_lengkap').value = data.NamaLengkap;
+                    document.getElementById('tempat_lahir').value = data.TempatLahir;
+                    document.getElementById('tanggal_lahir').value = data.TanggalLahir;
+                    document.getElementById('agama').value = data.Agama;
+                    document.getElementById('alamat').value = data.Alamat;
+                    document.getElementById('no_telp').value = data.NoTelp;
+                    document.getElementById('email').value = data.Email;
+                    document.getElementById('ipk').value = data.IPK;
+                    document.getElementById('bidang_studi').value = data.BidangStudi;
+                })
+                .catch(error => console.error('Error fetching data:', error));
+        });
+
+        // document.getElementById('edit-form').addEventListener('submit', function (event) {
+        //     event.preventDefault();
+
+        //     const formData = new FormData(this);
+
+        //     formData.delete('nim');
+        //     formData.delete('no-ijazah');
+        //     formData.delete('ipk');
+
+        //     // fetch('/edit-mahasiswa/{nim}', {
+        //     //     method: 'POST',
+        //     //     body: formData
+        //     // })
+        //     // .then(response => response.json())
+        //     // .then(data => {
+        //     //     if (data.message) {
+        //     //         alert(data.message);
+        //     //     } else {
+        //     //         alert('Profile updated successfully!');
+        //     //         window.location.href = '/mahasiswa'; 
+        //     //     }
+        //     // })
+        //     // .catch(error => console.error('Error updating profile:', error));
+        // });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome | Go Session Auth</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to right, #003C43, #135D66);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            position: relative;
+        }
+        .background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(-60deg, #003C43 50%, #135D66 50%);
+            opacity: 0.5;
+            z-index: -2;
+            animation: slide 5s ease-in-out infinite alternate;
+        }
+        .background::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 200%;
+            height: 100%;
+            background: linear-gradient(-60deg, #77B0AA 50%, #E3FEF7 50%);
+            opacity: 0.5;
+            z-index: -1;
+            animation: slide 6s ease-in-out infinite alternate-reverse;
+        }
+        .container {
+            max-width: 500px;
+            width: 100%;
+            background-color: #E3FEF7;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+            transition: transform 0.4s, box-shadow 0.3s;
+            z-index: 1;
+        }
+        .container:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+        }
+        .logo-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .logo {
+            max-width: 100px;
+        }
+        h4 {
+            margin-bottom: 20px;
+            font-size: 26px;
+            color: transparent;
+            text-align: center;
+            font-family: 'Helvetica', sans-serif;
+            font-weight: 900;
+            background: linear-gradient(to right, #003C43, #135D66, #77B0AA, #E3FEF7, #003C43, #135D66, #77B0AA, #E3FEF7);
+            background-size: 400%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            animation: sTransition 10s linear infinite;
+}
+        @keyframes sTransition {
+                0% {
+                    background-position: 0%;
+                }
+                100% {
+                    background-position: 400%;
+                }
+            }
+
+            p {
+            margin-bottom: 20px;
+            color: #003C43;
+            text-align: center;
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        p span {
+            display: block;
+            margin-top: 10px;
+            color: #77B0AA;
+            font-size: 14px;
+            font-weight: normal;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group:hover {
+            background-color: #e9ecef;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-family: 'Arial', sans-serif;
+            font-size: 14px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: color 0.3s, background-color 0.3s;
+        }
+        .form-group label:hover {
+            color: #007bff;
+            background-color: #e9ecef;
+        }
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .form-control:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+            outline: none;
+        }
+        .notification {
+            color: #f00;
+            font-size: 14px;
+            margin-top: 10px;
+            text-align: center;
+        }
+        .btn {
+            width: 100%;
+            padding: 12px 20px;
+            font-size: 17px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            text-align: center;
+            letter-spacing: 1px;
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+        }
+
+        .btn-success {
+            background-color: #77B0AA;
+            color: #fff;
+            transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 60, 67, 0.1);
+        }
+
+        .btn-success:hover {
+            background-color: #003C43;
+            transform: scale(1.05);
+            box-shadow: 0 8px 12px rgba(0, 60, 67, 0.2);
+        }
+
+        .btn-success:active {
+            background-color: #135D66;
+            transform: scale(1);
+            box-shadow: 0 4px 6px rgba(0, 60, 67, 0.2);
+        }
+
+        .btn-success:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(119, 176, 170, 0.5);
+        }
+
+        hr {
+            margin: 20px 0;
+            border: 0;
+            border-top: 1px solid #eee;
+        }
+        .radio-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .radio-group input[type="radio"] {
+            margin-right: 10px; 
+        }
+        .radio-group label {
+            margin-right: 20px; 
+            cursor: pointer;
+        }
+        @keyframes slide {
+            0% {
+                transform: translateX(-25%);
+            }
+            100% {
+                transform: translateX(25%);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="background"></div>
+    <div class="container mt-5">
+        <h4>Sign In</h4>
+        <p>Silahkan masukkan username dan password</p>
+        <form id="loginForm" action="/login" method="post">
+            <div class="form-group">
+                <label>Username</label>
+                <input type="text" name="username" id="username" class="form-control" autocomplete="off" />
+            </div>
+        
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" name="password" id="password" class="form-control" autocomplete="off" />
+                <button type="button" id="togglePassword" class="btn btn-secondary">Show</button>
+            </div>
+            
+            <script>
+                const togglePassword = document.getElementById('togglePassword');
+                const password = document.getElementById('password');
+            
+                togglePassword.addEventListener('click', function () {
+                    // Toggle the type attribute
+                    const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+                    password.setAttribute('type', type);
+                    
+                    // Toggle the button text
+                    this.textContent = type === 'password' ? 'Show' : 'Hide';
+                });
+            </script>
+            
+        
+            <button type="submit" class="btn btn-success btn-block">SIGN IN</button>
+        </form>
+        
+    </div>
+</body>
+</html>

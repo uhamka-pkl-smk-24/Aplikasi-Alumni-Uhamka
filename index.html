@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BPTI UHAMKA</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #E3FEF7;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #003C43;
+            color: white;
+            padding: 20px 40px;
+            position: relative;
+            animation: slideDown 0.5s ease-in-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+            }
+            to {
+                transform: translateY(0);
+            }
+        }
+
+        .header-container h4 {
+            margin: 0;
+            font-size: 2em;
+            font-weight: bold;
+            display: flex;
+            gap: 2px;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .header-container h4 span {
+            display: inline-block;
+            opacity: 0;
+            transform: translateY(-50px);
+            animation: drop 1s forwards;
+        }
+
+        @keyframes drop {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header-container h4 span:nth-child(1) { animation-delay: 0s; }
+        .header-container h4 span:nth-child(2) { animation-delay: 0.1s; }
+        .header-container h4 span:nth-child(3) { animation-delay: 0.2s; }
+        .header-container h4 span:nth-child(4) { animation-delay: 0.3s; }
+        .header-container h4 span:nth-child(5) { animation-delay: 0.4s; }
+        .header-container h4 span:nth-child(6) { animation-delay: 0.5s; }
+        .header-container h4 span:nth-child(7) { animation-delay: 0.6s; }
+        .header-container h4 span:nth-child(8) { animation-delay: 0.7s; }
+        .header-container h4 span:nth-child(9) { animation-delay: 0.8s; }
+        .header-container h4 span:nth-child(10) { animation-delay: 0.9s; }
+        .header-container h4 span:nth-child(11) { animation-delay: 1s; }
+
+        .header-container h4:hover {
+            color: #77B0AA;
+            transform: scale(1.1);
+            text-shadow: 0 0 10px rgba(119, 176, 170, 0.8);
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .search-container {
+            display: flex;
+            align-items: center;
+            background-color: white;
+            padding: 5px;
+            border-radius: 5px;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        .search-container input {
+            border: none;
+            padding: 10px;
+            border-radius: 3px;
+            width: 250px;
+            transition: box-shadow 0.3s;
+        }
+
+        .search-container input:hover {
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .search-container button {
+            padding: 10px 20px;
+            margin-left: 5px;
+            border: none;
+            border-radius: 3px;
+            background-color: #135D66;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .search-container button:hover {
+            background-color: #77B0AA;
+            transform: scale(1.05);
+        }
+
+        .logout-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .logout-btn {
+            background-color: #77B0AA;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 3px;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .logout-btn:hover {
+            background-color: #135D66;
+            transform: scale(1.05);
+        }
+
+        nav {
+            background-color: #135D66;
+            padding: 10px 0;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        nav ul li {
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 10px 15px;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        nav ul li a:hover {
+            background-color: #77B0AA;
+            transform: scale(1.1);
+        }
+
+        .hero {
+            text-align: center;
+            padding: 50px 20px;
+            background-color: #E3FEF7;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        .hero h1 {
+            font-size: 3em;
+            margin: 0;
+            color: #003C43;
+            transition: color 0.3s, transform 0.3s;
+        }
+
+        .hero h1:hover {
+            color: #77B0AA;
+            transform: scale(1.0);
+        }
+
+        .hero p {
+            font-size: 1.5em;
+            color: #135D66;
+            transition: color 0.3s, transform 0.3s;
+        }
+
+        .hero p:hover {
+            color: #003C43;
+            transform: scale(1.0);
+        }
+
+        .content {
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+            gap: 20px;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        .card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
+            width: 200px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .card h2 {
+            margin: 0;
+            color: #135D66;
+            transition: color 0.3s;
+        }
+
+        .card h2:hover {
+            color: #003C43;
+        }
+
+        html, body {
+            height: 100%;
+            margin: 0;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background-color: #E3FEF7;
+        }
+
+        main {
+            flex: 1;
+        }
+
+        footer {
+            background-color: #003C43;
+            color: white;
+            padding: 5px 10px;
+            text-align: center;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        .footer-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .social-media {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 5px;
+        }
+
+        .social-icon {
+            text-decoration: none;
+            color: white;
+            font-size: 1.0em;
+            padding: 5px;
+            border-radius: 90%;
+            background-color: #135D66;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .social-icon:hover {
+            background-color: #77B0AA;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <h4>
+                <span>B</span>
+                <span>P</span>
+                <span>T</span>
+                <span>I</span>
+                <span>&nbsp;</span>
+                <span>U</span>
+                <span>H</span>
+                <span>A</span>
+                <span>M</span>
+                <span>K</span>
+                <span>A</span>
+            </h4>
+            <div class="search-container">
+                <input type="text" placeholder="Cari NIM...">
+                <button type="button">Cari</button>
+            </div>
+            <div class="logout-container">
+                <button type="button" class="logout-btn" href="/logou">Logout</button>
+            </div>
+            <div class="navbar-toggle" id="mobile-menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+        <nav>
+            <ul class="navbar-menu">
+                <li><a href="beranda.html">Beranda</a></li>
+                <li><a href="pasangloker.html">Pasang Loker</a></li>
+                <li><a href="cariloker.html">Cari Loker</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        <section class="hero">
+            <h1>Hello, {{ .username }}</h1>
+            <p>Find easier ways to use your benefits for any path you take.</p>
+        </section>
+        <section class="content">
+            <div class="card">
+                <h2></h2>
+            </div>
+            <div class="card">
+                <h2></h2>
+            </div>
+            <div class="card">
+                <h2></h2>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <div class="footer-container">
+            <p>Follow Us:</p>
+            <div class="social-media">
+                <a href="#" class="social-icon">Facebook</a>
+                <a href="#" class="social-icon">Twitter</a>
+                <a href="#" class="social-icon">Instagram</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('mobile-menu').addEventListener('click', function() {
+            var menu = document.querySelector('.navbar-menu');
+            menu.classList.toggle('active');
+        });
+    </script>
+</body>
+</html>

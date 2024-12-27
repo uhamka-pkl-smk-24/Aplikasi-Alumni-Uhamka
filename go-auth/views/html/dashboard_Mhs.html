@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mahasiswa Dashboard</title>
+
+    <link rel="stylesheet" href="style.css">
+    
+    <style>
+        body {
+            font-family: 'Roboto', 'Arial', 'Helvetica', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .container {
+            width: 100%;
+            height: 100%;
+            background-color: #fff;
+            padding: 10px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            border-radius: 16px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-sizing: border-box;
+            position: relative;
+        }
+
+        .header {
+            text-align: center;
+            background-color: #003C43;
+            color: #E3FEF7;
+            padding: 20px;
+            border-radius: 12px;
+            width: 100%;
+            box-sizing: border-box;
+            position: relative;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .header:hover {
+            background-color: #002e32;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .header h1 {
+            font-size: 28px;
+            margin: 0;
+            transition: color 0.3s ease;
+        }
+
+        .header:hover h1 {
+            color: #cce7e7;
+        }
+
+        .logout-container {
+            position: absolute;
+            right: 50px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        #logout-button {
+            background-color: #E3FEF7;
+            color: #003C43;
+            border: 2px solid #003C43;
+            padding: 7px 2px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+            margin:  1px;
+            font-size: 14px;
+            font-weight: 550;
+        }
+
+        #logout-button:hover {
+            background-color: #003C43;
+            color: #E3FEF7;
+            border: 2px solid #E3FEF7;
+            transform: scale(1.1);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .main-content {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            padding: 10px 0;
+            box-sizing: border-box;
+        }
+
+        .profile {
+            width: 56%;
+            background-color: #E3FEF7;
+            padding: 10px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            box-sizing: border-box;
+            transition: box-shadow 0.3s ease, transform 0.3s ease;
+        }
+
+        .profile:hover {
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+            transform: translateY(-5px);
+        }
+
+        .profile h2 {
+            background-color: #135D66;
+            color: #fff;
+            padding: 10px;
+            border-radius: 12px;
+            margin: 0 0 10px 0;
+            text-align: center;
+            transition: background-color 0.3s ease;
+        }
+
+        .profile:hover h2 {
+            background-color: #003C43;
+        }
+
+        .profile p {
+            font-size: 16px;
+            margin: 5px 0;
+            text-transform: capitalize;
+        }
+
+        .profile .label {
+            font-weight: bold;
+            display: inline-block;
+            width: 120px;
+        }
+
+        .profile button {
+            background-color: #77B0AA;
+            color: #fff;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            display: block;
+            margin: 20px auto 0;
+            font-size: 14px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .profile button:hover {
+            background-color: #135D66;
+            transform: scale(1.0);
+            font-weight: 600;
+        }
+
+        .picture {
+            width: 20%;
+            background-color: #E3FEF7;
+            padding: 10px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 14px;
+            color: #003C43;
+            transition: box-shadow 0.3s ease, transform 0.3s ease;
+        }
+        .picture img {
+            max-width: 100%;
+            max-height: 1000px; /* Adjust height as needed */
+            border-radius: 8px;
+            object-fit: cover; /* Ensures the image covers the area without distortion */
+            margin-bottom: 10px;
+        }
+        .picture span.image {
+            font-size: 16px;
+            font-weight: bold;
+            color: #003C43;
+            margin-bottom: 10px;
+        }
+
+        .picture:hover {
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+            transform: scale(1.02);
+        }
+
+        .info-box {
+            width: 80%;
+            background-color: #E3FEF7;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            font-family: 'Roboto', sans-serif;
+            font-size: 16px;
+            color: #444444;
+        }
+
+        .info-item {
+            padding: 10px 0;
+        }
+
+        .info-item + .info-item {
+            border-top: 1px solid #E0E0E0;
+            margin-top: 10px;
+            padding-top: 10px;
+        }
+
+        .info-item strong {
+            font-weight: 700;
+            color: #2C3E50;
+        }
+
+        .info-item span {
+            display: block;
+            font-weight: 400;
+            color: #555555;
+            margin-bottom: 5px;
+        }
+
+
+        .application-section {
+            width: 100%;
+            background-color: #E3FEF7;
+            padding: 10px;
+            border-radius: 12px;
+            box-sizing: border-box;
+            margin-top: 10px;
+            transition: box-shadow 0.3s ease;
+        }
+
+        .application-section:hover {
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .application-section h2 {
+            text-align: center;
+            background-color: #135D66;
+            color: #fff;
+            padding: 10px;
+            border-radius: 12px;
+            margin: 0 0 10px 0;
+            transition: background-color 0.3s ease;
+        }
+
+        .application-section:hover h2 {
+            background-color: #003C43;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 15px;
+            padding: 10px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            font-size: 14px;
+            font-weight: 600;
+            color: #003C43;
+            margin-bottom: 2px;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        input, textarea {
+            padding: 6px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 12px;
+            font-family: 'Roboto', sans-serif;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        input:focus, textarea:focus {
+            border-color: #135D66;
+            box-shadow: 0 0 3px rgba(19, 93, 102, 0.3);
+        }
+
+        button {
+            background-color: #77B0AA;
+            color: #fff;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 12px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #135D66;
+            transform: scale(1.015);
+            font-weight: 600;
+        }
+        
+        
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Selamat datang, {{ .mahasiswa.NamaLengkap }} ! Have a great day.</h1>
+            <div class="logout-container">
+                <button id="logout-button" onclick="window.location.href='/';">Lowongan</button>
+                <button id="logout-button" onclick="window.location.href='/logout';">Logout</button>
+            </div>
+        </div>
+        <div class="main-content">
+            <div class="picture">
+                <span class="image" id="photo"></span>
+                <!-- Display image based on the filename -->
+                <img src="/foto?{{ .mahasiswa.NIM }}" alt="Student Photo" />
+            </div>
+            <div class="profile">
+                <h2>PROFILE</h2>
+                <p><span class="label">NIM:</span> {{ .mahasiswa.NIM }}</p>
+                <p><span class="label">No Ijazah:</span> {{ .mahasiswa.NoIjazah }}</p>
+                <p><span class="label">Nama Lengkap:</span> {{ .mahasiswa.NamaLengkap }}</p>
+                <p><span class="label">Tempat Lahir:</span> {{ .mahasiswa.TempatLahir }}</p>
+                <p><span class="label">Tanggal Lahir:</span> {{ .mahasiswa.TanggalLahir }}</p>
+                <p><span class="label">Agama:</span> {{ .mahasiswa.Agama }}</p>
+                <p><span class="label">Alamat:</span> {{ .mahasiswa.Alamat }}</p>
+                <p><span class="label">No Telepon:</span> {{ .mahasiswa.NoTelp }}</p>
+                <p><span class="label">Email:</span> {{ .mahasiswa.Email }}</p>
+                <p><span class="label">IPK:</span> {{ .mahasiswa.IPK }}</p>
+                <p><span class="label">Bidang Studi:</span> {{ .mahasiswa.BidangStudi }}</p>
+                <button id="edit-button">Edit</button>
+            </div>
+            <div class="info-sections">
+                {{range .Lamarans}}
+                <div class="info-box">
+                <strong>Pekerjaan:</strong> {{.NamaPekerjaan}}
+                <br><strong>Perusahaan: </strong>{{.Perusahaan}} 
+                <br><strong>Surat: </strong>{{.SuratLamaran}}
+                </div>
+                {{else}}
+                <div class="info-box">
+                    Tidak ada notifikasi.
+                </div>
+                {{end}}
+                
+            </div>
+            
+        </div>
+
+    
+        <div class="application-section">
+            <form id="application-form" method="POST" action="/upload-lamaran" enctype="multipart/form-data">
+                <label for="nama_pekerjaan">Nama Pekerjaan:</label>
+                <input type="text" id="nama_pekerjaan" name="nama_pekerjaan" required readonly>
+            
+                <label for="perusahaan">Perusahaan:</label>
+                <input type="text" id="perusahaan" name="perusahaan" required readonly>
+            
+                <label for="surat_lamaran">Surat Lamaran:</label>
+                <input type="file" id="surat_lamaran" name="surat_lamaran" accept=".pdf, .doc, .docx" required>
+            
+                <button type="submit">Kirim Lamaran</button>
+            </form>
+        </div> 
+    </div>
+
+    <script>
+        // Mendapatkan data dari localStorage dan mengisi form
+        document.addEventListener('DOMContentLoaded', function () {
+            const namaPekerjaan = localStorage.getItem('nama_pekerjaan');
+            const perusahaan = localStorage.getItem('perusahaan');
+    
+            if (namaPekerjaan && perusahaan) {
+                document.getElementById('nama_pekerjaan').value = namaPekerjaan;
+                document.getElementById('perusahaan').value = perusahaan;
+    
+                // Bersihkan localStorage setelah digunakan
+                localStorage.removeItem('nama_pekerjaan');
+                localStorage.removeItem('perusahaan');
+            }
+        });
+    </script>
+    
+
+    <script>
+    document.getElementById('edit-button').addEventListener('click', function() {
+        window.location.href = '/edit-profile/{nim}'; 
+    });
+
+    
+    document.getElementById('add-job').addEventListener('click', function() {
+        // Ambil nilai dari form
+        const jobName = document.getElementById('nama_pekerjaan').value;
+        const jobCompany = document.getElementById('perusahaan').value;
+        const jobApplication = document.getElementById('surat_lamaran').value;
+
+        console.log("Nama Pekerjaan:", jobName);
+        console.log("Perusahaan:", jobCompany);
+        console.log("Surat Lamaran:", jobApplication);
+
+        if (jobName && jobCompany && jobApplication) {
+            // Buat baris baru dalam tabel
+            const newRow = document.createElement('tr');
+
+            // Buat kolom baru untuk setiap data pekerjaan
+            const nameCell = document.createElement('td');
+            nameCell.textContent = jobName;
+            newRow.appendChild(nameCell);
+
+            const companyCell = document.createElement('td');
+            companyCell.textContent = jobCompany;
+            newRow.appendChild(companyCell);
+
+            const applicationCell = document.createElement('td');
+            applicationCell.textContent = jobApplication;
+            newRow.appendChild(applicationCell);
+
+
+            document.getElementById('job-table-body').appendChild(newRow);
+
+            document.getElementById('nama_pekerjaan').value = '';
+            document.getElementById('perusahaan').value = '';
+            document.getElementById('surat_lamaran').value = '';
+        } else {
+            alert("Harap isi semua bidang!");
+        }
+    });
+</script>
+
+</body>
+</html>

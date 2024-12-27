@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pencarian Lowongan Pekerjaan</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #003C43;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(315deg, #003C43 3%, #135D66 38%, #77B0AA 68%, #E3FEF7 98%); 
+            animation: gradient 15s ease infinite;
+            background-size: 400% 400%;
+            background-attachment: fixed;
+            overflow: auto;
+        }
+
+        @keyframes gradient {
+            0% {
+                background-position: 0% 0%;
+            }
+            50% {
+                background-position: 100% 100%;
+            }
+            100% {
+                background-position: 0% 0%;
+            }
+        }
+
+        .wave {
+            background: rgba(227, 254, 247, 0.25);
+            border-radius: 1000% 1000% 0 0;
+            position: fixed;
+            width: 200%;
+            height: 12em;
+            animation: wave 10s -3s linear infinite;
+            transform: translate3d(0, 0, 0);
+            opacity: 0.8;
+            bottom: 0;
+            left: 0;
+            z-index: -1;
+        }
+
+        .wave:nth-of-type(2) {
+            bottom: -1.25em;
+            animation: wave 18s linear reverse infinite;
+            opacity: 0.8;
+        }
+
+        .wave:nth-of-type(3) {
+            bottom: -2.5em;
+            animation: wave 20s -1s reverse infinite;
+            opacity: 0.9;
+        }
+
+        @keyframes wave {
+            2% {
+                transform: translateX(1);
+            }
+            25% {
+                transform: translateX(-25%);
+            }
+            50% {
+                transform: translateX(-50%);
+            }
+            75% {
+                transform: translateX(-25%);
+            }
+            100% {
+                transform: translateX(1);
+            }
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1000px;
+            margin: auto;
+            background-color: #FFFFFF;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            padding: 30px 40px;
+            animation: fadeInAnimation 1s ease forwards;
+        }
+
+        @keyframes fadeInAnimation {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #003C43;
+            font-size: 28px;
+            font-weight: 650;
+            background: linear-gradient(-45deg, #003C43, #135D66, #003C43);
+            background-size: 400% 400%;
+            
+            color: #E3FEF7;
+            padding: 10px;
+            border-radius: 8px;
+            animation: gradientAnimation 10s ease-in-out infinite;
+        }
+
+        @keyframes gradientAnimation {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .form-row {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            width: 30%;
+            min-width: 250px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #135D66;
+            font-size: 16px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: color 0.3s ease-in-out;
+            position: relative;
+        }
+
+        .form-group label::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 2px;
+            background-color: #77B0AA;
+            transition: width 0.4s ease-in-out;
+        }
+
+        .form-group label:hover {
+            color: #003C43;
+        }
+
+        .form-group label:hover::after {
+            width: 100%;
+        }
+
+
+        .form-group input[type="text"],
+        .form-group input[type="number"],
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #77B0AA;
+            border-radius: 10px;
+            background-color: #E3FEF7;
+            color: #003C43;
+            box-sizing: border-box;
+            
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .form-group input[type="text"]:focus,
+        .form-group input[type="number"]:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: #135D66;
+            background-color: #FFFFFF;
+            box-shadow: 0 0 5px #77B0AA;
+            outline: none;
+        }
+
+        .form-group textarea {
+            height: 100px;
+            resize: vertical;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+
+        .button-container button {
+            width: 48%;
+            padding: 12px;
+            border-radius: 12px;
+            font-weight: bold;
+            border: none;
+            color: #E3FEF7;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+            text-transform: uppercase;
+        }
+
+        .button-container button:first-of-type {
+            background: linear-gradient(45deg, #003C43, #135D66);
+        }
+
+        .button-container button:first-of-type:hover {
+            background: linear-gradient(45deg, #135D66, #77B0AA);
+        }
+
+        .button-container button:first-of-type:active {
+            background: linear-gradient(45deg, #135D66, #77B0AA);
+        }
+
+        .button-container button:last-of-type {
+            background: linear-gradient(45deg, #003C43, #135D66);
+        }
+
+        .button-container button:last-of-type:hover {
+            background: linear-gradient(45deg, #135D66, #77B0AA);
+        }
+
+        .button-container button:last-of-type:active {
+            background: linear-gradient(45deg, #135D66, #77B0AA);
+        }
+
+
+    </style>
+</head>
+<body>
+    <div>
+        <div class="wave"></div>
+        <div class="wave"></div>
+        <div class="wave"></div>
+     </div>
+    <div class="container">
+        <h2>Pasang Lowongan Pekerjaan</h2>
+        <form action="/pasang-lowongan" method="post">
+         <div class="form-row">
+            <div class="form-group">
+                <label for="nama-pekerjaan">Nama Pekerjaan</label>
+                <input type="text" id="nama-pekerjaan" name="nama_pekerjaan" required>
+            </div>
+
+            <div class="form-group">
+                <label for="perusahaan">Perusahaan</label>
+                <input type="text" id="perusahaan" name="perusahaan" required>
+            </div>
+
+            <div class="form-group">
+                <label for="lokasi">Lokasi</label>
+                <input type="text" id="lokasi" name="lokasi" required>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label for="gaji">Gaji</label>
+                <input type="number" id="gaji" name="gaji" required>
+            </div>
+
+            <div class="form-group">
+                <label for="deskripsi">Deskripsi</label>
+                <textarea id="deskripsi" name="deskripsi" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="persyaratan">Persyaratan</label>
+                <textarea id="syarat" name="syarat" required></textarea>
+            </div>
+        </div>
+
+            <div class="button-container">
+                <button type="button" id="backLink">Cancel</button>
+                <button type="submit">Post Job</button>
+            </div>            
+        </form>
+    </div>
+    <script>
+        document.getElementById('backLink').addEventListener('click', function (e) {
+            e.preventDefault();
+
+            const currentURL = document.referrer; 
+
+            if (currentURL.includes('/adminlowongan')) {
+            window.location.href = '/adminlowongan'; 
+            } else{
+            window.location.href = '/'; 
+            }
+        });
+        </script>
+</body>
+</html>
